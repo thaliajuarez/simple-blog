@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Simpler</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <div class="center">
+        <div class="row">
+            <div class="column left">
+                <h1>Blog Post</h1>
+                <p><textarea id="content" name="paragraph_text" cols="50" rows="10"></textarea></p>
+                <p>
+                    <button id="submit-btn" type="button" onClick="createPost()">Create New Post</button>
+                    <button hidden id="edit-btn" type="button" onClick="editPost()">Edit Post</button>
+                </p>
+
+                <h4 hidden id="comment-header">Comments</h4>
+                <div id="comment-list">
+                </div>
+
+                <p><textarea hidden id="comment-box" name="paragraph_text" cols="25" rows="3"></textarea></p>
+                <p>
+                    <button hidden id="comment-btn" type="button">Add Comment</button>
+                </p>
+
+            </div>
+            <div class="column right">
+                <h1>Latest Posts</h1>
+                <div id="post-list">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+
+</html>
