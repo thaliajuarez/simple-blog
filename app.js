@@ -33,16 +33,9 @@ function getPosts() {
   testList.forEach(function (postEntry, idx) {
     entries +=
       "<div>" +
-      '<h3><a href="javascript:viewPost(' +
-      idx +
-      ');"> Post #' +
-      (idx + 1) +
-      "</a></h3>" +
-      "<p>" +
-      postEntry.content +
-      "</p>" +
-      "<p><em> " +
-      postEntry.comments.length + " Comments: </em></p><p>" +
+      '<h3><a href="javascript:viewPost(' + idx + ');"> Post #' + (idx + 1) + "</a></h3>" +
+      "<p>" + postEntry.content + "</p>" +
+      "<p><em> " + postEntry.comments.length + " Comments: </em></p><p>" +
       postEntry.comments +
       "</p>" +
       "<p> ****************************************************************** </p>" +
@@ -106,58 +99,4 @@ function editPost(index) {
 
     getPosts();
   };
-}
-
-// CREATE COMMENT
-function createComment(index) {}
-
-// READ COMMENT
-function getComments(postObject) {
-  //let entries = "";
-  //postObject.comments.forEach(function(item) {
-  //    entries += '<div><blockquote><p>' +
-  //        item.comments + '</blockquote></p></div>';
-  //});
-  //document.getElementById('post-list').innerHTML = entries;
-}
-
-function TESTcreatePost() {
-  var examplePost = document.getElementById("content").value;
-  postList.push(examplePost);
-  document.getElementById("content").value = "";
-
-  const previousPosts = document.querySelector(".post-list");
-  previousPosts.setAttribute("style", "padding: 10px; border: 1px solid;");
-
-  const newPost = document.createElement("div");
-  newPost.textContent = examplePost;
-
-  const comment = document.createElement("input");
-  comment.setAttribute("style", "padding: 5px;");
-  comment.setAttribute("type", "text");
-
-  const listOfComments = document.createElement("div");
-  listOfComments.setAttribute("style", "background-color: light-gray;");
-  listOfComments.setAttribute("id", "new-comment");
-
-  const submitComment = document.createElement("button");
-  submitComment.textContent = "Add Comment";
-  submitComment.onclick = function () {
-    commentList.push(comment.value);
-    comment.value = "";
-    showComments();
-  };
-
-  newPost.appendChild(listOfComments); // KEEP
-  previousPosts.appendChild(comment); // KEEP
-  previousPosts.insertBefore(newPost, comment); // KEEP
-  previousPosts.appendChild(submitComment); // KEEP
-}
-
-function showComments() {
-  var idx = "";
-  commentList.forEach(function (item) {
-    idx += "<li>" + item + "</li>";
-  });
-  document.getElementById("new-comment").innerHTML = "<ul>" + idx + "</ul>";
 }
