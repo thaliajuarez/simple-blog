@@ -33,7 +33,7 @@ Views: Main page
 
 ## Software Development
 
-### What happens when you use vanilla JavaScript over a framework?
+### What happens when you use vanilla JavaScript instead of a framework?
 - Writing an application in vanilla JS means you are manually manipulating the Document Object Model (DOM), "a set of APIs for controlling HTML and styling information that makes heavy use of the Document object".  [source](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Client-side_web_APIs/Manipulating_documents)
 
 - There exist two kinds of programming paradigms, or approaches of writing code, imperative and declarative. Imperitive is procedural, object-oriented programming, while declarative is functional. Declarative languages include SQL, HTML and CSS, and other database query languages. [source](https://www.linkedin.com/pulse/imperative-vs-declarative-programming-javascript-yehuda-margolis)
