@@ -19,7 +19,7 @@ var testList = [
 function createPost() {
   const postObject = {
     content: document.getElementById("content").value,
-    comments: []
+    comments: [],
   };
   testList.push(postObject);
 
@@ -32,32 +32,41 @@ function getPosts() {
   let entries = "";
   testList.forEach(function (postEntry, idx) {
     entries +=
-      "<div>" +
-      '<h3><a href="javascript:viewPost(' + idx + ');"> Post #' + (idx + 1) + "</a></h3>" +
-      "<p>" + postEntry.content + "</p>" +
-      "<p><em> " + postEntry.comments.length + " Comments: </em></p><p>" +
-      postEntry.comments +
+      '<h3><a href="javascript:viewPost(' +
+      idx +
+      ');"> Post #' +
+      (idx + 1) +
+      "</a></h3>" +
+      "<p>" +
+      postEntry.content +
       "</p>" +
-      "<p> ****************************************************************** </p>" +
-      "</div>";
+      "<p><em> " +
+      postEntry.comments.length +
+      " Comments: </em></p><p>" +
+      postEntry.comments +
+      '<script></script>'
+      "</p>" +
+      "<p> ****************************************************************** </p>";
   });
   document.getElementById("post-list").innerHTML = entries;
 }
 
 // VIEW - aka 'get post by id'
 function viewPost(index) {
-
   Object.keys(null || {}); // what difference does this make?
 
   document.getElementById("content").value = testList[index].content;
   //document.getElementById("submit-btn").style.display="none";  // -- remove comment to prevent creating a new post!
-  document.getElementById("comment-box").value = '';
-  document.getElementById("comment-list").innerHTML = '';
+  document.getElementById("comment-box").value = "";
+  document.getElementById("comment-list").innerHTML = "";
 
-  if (testList[index].comments.length == 0) {  // getComments(index); - What if comment array is empty?
+  if (testList[index].comments.length == 0) {
+    // getComments(index); - What if comment array is empty?
     console.log("no comments for this post");
   } else {
-    console.log("this post has " + testList[index].comments.length + " comments");
+    console.log(
+      "this post has " + testList[index].comments.length + " comments"
+    );
     console.log();
 
     let html = "";
@@ -69,34 +78,40 @@ function viewPost(index) {
 
   document.getElementById("comment-header").removeAttribute("hidden");
 
+  // Add comment
   document.getElementById("comment-box").removeAttribute("hidden");
 
   document.getElementById("comment-btn").removeAttribute("hidden");
-  document.getElementById("comment-btn").onclick = function() {
-    testList[index].comments.push(document.getElementById("comment-box").value);
-    getPosts();
-  }
-}
+  document.getElementById("comment-btn").onclick = function () {
+    // Send to comment moderation function
+    filterComment = document.getElementById("comment-box").value;
+    bannedList = ["forbidden", "banned", "troll", "reject"];
 
-// UPDATE
-function editPost(index) {
-  document.getElementById("content").value = postList[index].content;
+    bannedList.forEach(function (word) {
+      if (filterComment.includes(word)) {
+        filterComment = "Rejected by moderator.";
+      } else {}});
 
-  document.getElementById("submit-btn").innerHTML = "Edit Post";
-  document.getElementById("submit-btn").onclick = function () {
-    let commentList = postList[index].comments;
-    commentList.push(document.getElementById("comment").value);
-    // --- replace the current post ---
-    const editedObject = {
-      content: document.getElementById("content").value,
-      comments: commentList,
-      edited: true,
-    };
+    testList[index].comments.push(filterComment);
 
-    postList[index] = editedObject;
-    document.getElementById("content").value = "";
-    document.getElementById("comment").value = "";
-
+    let html = "";
+    testList[index].comments.forEach(function (item) {
+      html += "<li>" + item + "</li>";
+    });
+    document.getElementById("comment-list").innerHTML = html;
     getPosts();
   };
+}
+
+// Passing parameters - why no work?
+function moderate(_unfilteredComment) {
+  bannedList = ["forbidden", "banned", "troll", "reject"];
+
+  bannedList.forEach(function (word) {
+    if (_unfilteredComment.includes(word)) {
+      return "Rejected by moderator.";
+    } else {
+      return _unfilteredComment;
+    }
+  });
 }
