@@ -29,7 +29,7 @@ function createPost() {
 
 // READ POST
 function getPosts() {
-  let entries = "";
+  let entries = "<h5>Click post link to add a comment</h5>";
   testList.forEach(function (postEntry, idx) {
     entries +=
       '<h3><a href="javascript:viewPost(' +
@@ -44,7 +44,6 @@ function getPosts() {
       postEntry.comments.length +
       " Comments: </em></p><p>" +
       postEntry.comments +
-      '<script></script>'
       "</p>" +
       "<p> ****************************************************************** </p>";
   });
@@ -85,8 +84,8 @@ function viewPost(index) {
   document.getElementById("comment-btn").onclick = function () {
     // Send to comment moderation function
     filterComment = document.getElementById("comment-box").value;
-    bannedList = ["forbidden", "banned", "troll", "reject"];
 
+    bannedList = ["forbidden", "banned", "troll", "reject"];
     bannedList.forEach(function (word) {
       if (filterComment.includes(word)) {
         filterComment = "Rejected by moderator.";
@@ -94,6 +93,7 @@ function viewPost(index) {
 
     testList[index].comments.push(filterComment);
 
+    // append to comment list with new, filtered comment
     let html = "";
     testList[index].comments.forEach(function (item) {
       html += "<li>" + item + "</li>";
@@ -101,17 +101,4 @@ function viewPost(index) {
     document.getElementById("comment-list").innerHTML = html;
     getPosts();
   };
-}
-
-// Passing parameters - why no work?
-function moderate(_unfilteredComment) {
-  bannedList = ["forbidden", "banned", "troll", "reject"];
-
-  bannedList.forEach(function (word) {
-    if (_unfilteredComment.includes(word)) {
-      return "Rejected by moderator.";
-    } else {
-      return _unfilteredComment;
-    }
-  });
 }
